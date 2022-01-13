@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+            给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为两个四元组重复）：
+            0 <= a, b, c, d < n
+            a、b、c 和 d 互不相同
+            nums[a] + nums[b] + nums[c] + nums[d] == target
+            你可以按 任意顺序 返回答案 。
+
+            示例 1：
+            输入：nums = [1,0,-1,0,-2,2], target = 0
+            输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+            示例 2：
+
+            输入：nums = [2,2,2,2,2], target = 8
+            输出：[[2,2,2,2]]
+             
+            提示：
+            1 <= nums.length <= 200
+            -109 <= nums[i] <= 109
+            -109 <= target <= 109
+        
+         */
+
+         
+        /**
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[][]}
+         */
+        var fourSum = function (nums, target) {
+            let arr = [];
+            let length = nums.length;
+            if (length < 4) return arr
+            nums = nums.sort((num1, num2) => num1 - num2);
+
+            for (let a = 0; a < length - 3; a++) {
+                // 同一重循环中，如果当前元素与上一个元素相同，则跳过当前元素。
+                if (a > 0 && nums[a] === nums[a - 1]) {
+                    continue;
+                }
+                // 最小值相加大于 target ，那么剩下的值都大于 target，则可以跳出循环体
+                if (nums[a] + nums[a + 1] + nums[a + 2] + nums[a + 3] > target) {
+                    break;
+                }
+                // 最小值相加小于 target ，那么跳过当前循环，开始下一次循环，直到找到第一个符合条件的值
+                if (nums[a] + nums[length - 1] + nums[length - 2] + nums[length - 3] < target) {
+                    continue;
+                }
+                for (let b = a + 1; b < length - 2; b++) {
+                    // 同一重循环中，如果当前元素与上一个元素相同，则跳过当前元素。
+                    if (b > a + 1 && nums[b] === nums[b - 1]) {
+                        continue;
+                    }
+                    // 最小值相加大于 target ，那么剩下的值都大于 target，则可以跳出循环体
+                    if (nums[a] + nums[b] + nums[b + 1] + nums[b + 2] > target) {
+                        break;
+                    }
+                    // 最小值相加小于 target ，那么跳过当前循环，开始下一次循环，直到找到第一个符合条件的值
+                    if (nums[a] + nums[b] + nums[length - 1] + nums[length - 2] < target) {
+                        continue;
+                    }
+                    let leftIndex = b + 1;
+                    let rightIndex = length - 1;
+                    while (leftIndex < rightIndex) {
+                        let sum = nums[a] + nums[b] + nums[leftIndex] + nums[rightIndex];
+                        if (sum === target) {
+                            /**
+                             * 去重
+                             */
+                            arr.push([nums[a], nums[b], nums[leftIndex], nums[rightIndex]]);
+                            if (leftIndex < rightIndex) {
+                                while (nums[leftIndex] === nums[leftIndex + 1]) {
+                                    leftIndex++;
+                                }
+                                while (nums[rightIndex] === nums[rightIndex - 1]) {
+                                    rightIndex--;
+                                }
+                            }
+                            rightIndex--;
+                            leftIndex++
+                        } else if (sum > target) {
+                            rightIndex--;
+                        } else {
+                            leftIndex++
+                        }
+                    }
+                }
+            }
+            return arr
+        };
+        console.log(fourSum([1,0,-1,0,-2,2]), 0);
+    </script>
+</body>
+
+</html>
