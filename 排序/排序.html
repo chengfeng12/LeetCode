@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>九大排序策略</title>
+</head>
+
+<body></body>
+<script>
+  let numList = [5, 4, 1, 6, 7, 9, 5, 3, 4, 1, 5, 6];
+
+  const sortFun = (arr) => {
+    /** 
+      冒泡排序
+    */
+    let count = 0;
+    // const len = arr.length;
+    // for (let i = 0; i < len; i++) {
+    //   for (let j = i + 1; j < len; j++) {
+    //     count++;
+    //     if (arr[i] > arr[j]) {
+    //       let tempNum = arr[i];
+    //       arr[i] = arr[j];
+    //       arr[j] = tempNum;
+    //     }
+    //   }
+    // }
+
+    for (let i = 0; i < arr.length; i++) {
+      // 提前退出冒泡循环的标识位
+      let flag = false;
+      for (let j = 0; j < arr.length - i - 1; j++) {
+        count++;
+        if (arr[j] > arr[j + 1]) {
+          const temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+          flag = true;
+          // 表示发生了数据交换
+        }
+      }
+      // 没有数据交换
+      if (!flag) break
+    }
+
+
+    /** 
+     * 选择排序
+     * 从未排序的序列中找到最大（或最小的）放在已排序序列的末尾（为空则放在起始位置），重复该操作，知道所有数据都已放入已排序序列中。
+     */
+    /* let minIndex = 0;
+    for (let i = 0; i < arr.length - 1; i++) {
+      minIndex = i;
+      for (let j = i; j < arr.length; j++) {
+        if (arr[minIndex] > arr[j]) {
+          minIndex = j;
+        }
+      }
+      if (i !== minIndex) {
+        let minValue = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = minValue;
+      }
+    } */
+
+    console.log(count);
+    return arr;
+  };
+
+
+  let quickSort = (arr) => {
+    quick(arr, 0, arr.length - 1)
+  }
+
+  let quick = (arr, left, right) => {
+    let index
+    if (left < right) {
+      // 划分数组
+      index = partition(arr, left, right)
+      if (left < index - 1) {
+        quick(arr, left, index - 1)
+      }
+      if (index < right) {
+        quick(arr, index, right)
+      }
+    }
+  }
+
+  // 一次快排
+  let partition = (arr, left, right) => {
+    let radom = Math.floor(Math.random() * (right - left + 1)) + left
+    // 取中间项为基准
+    var datum = arr[radom],
+      i = left,
+      j = right
+    // 开始调整
+    while (i <= j) {
+      // 左指针右移
+      while (arr[i] < datum) {
+        i++
+      }
+      // 右指针左移
+      while (arr[j] > datum) {
+        j--
+      }
+      // 交换
+      if (i <= j) {
+        swap(arr, i, j)
+        i += 1
+        j -= 1
+      }
+    }
+    return i
+  }
+
+  // 交换
+  let swap = (arr, i, j) => {
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+  }
+  // quickSort(numList);
+  // console.log(numList, "result");
+
+
+  const sort = (arr) => {
+    quickFun(arr, 0, arr.length - 1)
+  }
+
+  const quickFun = (arr, l, r) => {
+    if (l <= r) {
+      let index = quickItem(arr, l, r);
+      console.log(index, 'index');
+
+      if (l < index - 1) {
+        quickFun(arr, l, index - 1);
+      }
+
+      if (index < r) {
+        quickFun(arr, index, r)
+      }
+    }
+  }
+
+  // 优化的方法，三点取中
+
+  const quickItem = (arr, l, r) => {
+    let flag = arr[l],
+      left = l,
+      right = r;
+    while (left <= right) {
+
+      while (arr[left] < flag) {
+        left++;
+      }
+
+      while (arr[right] > flag) {
+        right--;
+      }
+
+      if (left <= right) {
+        swap(arr, left, right);
+        left++;
+        right--;
+      }
+    }
+    return left
+  }
+
+  // sort(numList);
+  // console.log(numList, "result");
+
+
+  // 插入排序 遍历的当前选项，向前去对比，如果小于前面的，则进行交换位置
+  console.log(numList);
+  const insertSort = (arr) => {
+    let count = 0;
+
+    for (let i = 1; i < arr.length; i++) {
+      const current = arr[i];
+      for (let j = i; j > 0; j--) {
+        count++;
+        if (arr[j] < arr[j - 1]) {
+          swap(arr, j, j - 1);
+        } else {
+          break
+        }
+      }
+    }
+
+    // 更优
+    /* let n = arr.length;
+    let preIndex, current;
+    for (let i = 1; i < n; i++) {
+
+      preIndex = i - 1;
+      current = arr[i];
+
+      while (preIndex >= 0 && arr[preIndex] > current) {
+        count++;
+        arr[preIndex + 1] = arr[preIndex];
+        preIndex--;
+      }
+      arr[preIndex + 1] = current;
+    } */
+
+    console.log(count);
+    return arr;
+  }
+  // console.log(insertSort(numList), "insert");
+
+
+  // 归并排序
+  const mergeSort = (arr) => {
+    let len = arr.length;
+    if (len === 1) return arr
+
+    let middle = Math.floor(len / 2),
+      left = arr.slice(0, middle),
+      right = arr.slice(middle);
+    return merge(mergeSort(left), mergeSort(right));
+  }
+
+  const merge = (lArr, rArr) => {
+    let result = [],
+      leftIndex = 0,
+      rightIndex = 0;
+
+    while (leftIndex < lArr.length && rightIndex < rArr.length) {
+      if (lArr[leftIndex] < rArr[rightIndex]) {
+        result.push(lArr[leftIndex++]);
+      } else {
+        result.push(rArr[rightIndex++]);
+      }
+    }
+
+    while (leftIndex < lArr.length) {
+      result.push(lArr[leftIndex++]);
+    }
+
+    while (rightIndex < rArr.length) {
+      result.push(rArr[rightIndex++]);
+    }
+    return result
+  }
+
+  console.log(mergeSort(numList), "mergeSort");
+
+</script>
+
+</html>
