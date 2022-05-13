@@ -1,3 +1,11 @@
+<!--
+ * @Author: YXR 913457727@qq.com
+ * @Date: 2022-04-01 14:17:10
+ * @LastEditors: YXR 913457727@qq.com
+ * @LastEditTime: 2022-05-13 16:45:24
+ * @FilePath: /LeetCode/中等/2. 两数相加.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,17 +56,41 @@
          * @param {ListNode} l2
          * @return {ListNode}
          */
+
+        // 返回的值为 ListNode 类型的，暂时不是
         var addTwoNumbers = function (l1, l2) {
-            if (!(l1.length && l2.length)) {
-                return []
+            let carry = 0;
+            let l1len = l1.length - 1,
+                l2len = l2.length - 1;
+            let result = [];
+
+            while (l1len >= 0 || l2len >= 0) {
+                let num1 = l1[l1len--] || 0;
+                let num2 = l2[l2len--] || 0;
+                let sum = num1 + num2 + carry;
+                if (sum >= 10) {
+                    carry = Math.floor(sum / 10);
+                    sum = sum % 10;
+                } else {
+                    carry = 0;
+                }
+                result.push(sum);
             }
-            let count = Number(l1.join("")) + Number(l2.join(""));
-            let list = count.toString().split("").map(item => Number(item)).reverse();
-            console.log(list, "list");
-            return list
+
+            if (carry) {
+                result.push(carry);
+            }
+            return result
+            // l1 = l1.reverse().toString().replace(/,/g, "") * 1;
+            // l2 = l2.reverse().toString().replace(/,/g, "") * 1;
+            // let result = l1 + l2;
+            // result = result.toString().split("").reverse().map(item => item *= 1);
+            // return result;
         };
         // 本地可行， leetCode 上不行, 报错
-        console.log(addTwoNumbers([2,4,3], [5,6,4]));
+        // console.log(addTwoNumbers([2,4,3], [5,6,4]));
+        // console.log(addTwoNumbers([9,9,9,9,9,9,9], [9,9,9,9]));
+        console.log(addTwoNumbers([0], [0]));
     </script>
 </body>
 
