@@ -1,0 +1,51 @@
+<!--
+ * @Author: YXR 913457727@qq.com
+ * @Date: 2022-05-13 16:52:48
+ * @LastEditors: YXR 913457727@qq.com
+ * @LastEditTime: 2022-05-13 17:11:22
+ * @FilePath: /LeetCode/简单/1812. 判断国际象棋棋盘中一个格子的颜色.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img src="../images/1812. 判断国际象棋棋盘中一个格子的颜色.png" alt="">
+  <script>
+    /* 输入：coordinates = "a1"
+    输出：false
+    解释：如上图棋盘所示，"a1" 坐标的格子是黑色的，所以返回 false 。
+    如果所给格子的颜色是白色，请你返回 true，如果是黑色，请返回 false 。 */
+
+
+    /**
+     * @param {string} coordinates
+     * @return {boolean}
+     */
+var squareIsWhite = function(coordinates) {
+  let menuValue = {
+    'a': 1,
+    'b': 2,
+    'c': 3,
+    'd': 4,
+    'e': 5,
+    'f': 6,
+    'g': 7,
+    'h': 8
+  }
+  
+
+  let str1 = menuValue[coordinates[0]] % 2,
+      str2 = coordinates[1] % 2;
+  return !(str1 === str2)
+};
+
+    console.log(squareIsWhite('c4'));
+  </script>
+</body>
+</html>
