@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>罗马数字转整数</title>
+</head>
+<body>
+  <script>
+    /**
+     * @param {string} s
+     * @return {number}
+     */
+
+     /**
+      * tips: 
+      *   使用 map 效果更好
+       */
+    var romanToInt = function(s) {
+      let obj = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+      }
+      let len = s.length,
+          total = 0;
+
+      for (let i = 0; i < len; i++) {
+        let curValue = obj[s[i]];
+        if (i < len - 1 && curValue < obj[s[i + 1]]) {
+          total -= curValue;
+        } else {
+          total += curValue;
+        }
+      }
+      return total
+    };
+    let str = "MCMXCIV";
+    console.log(romanToInt(str));
+  </script>
+</body>
+</html>

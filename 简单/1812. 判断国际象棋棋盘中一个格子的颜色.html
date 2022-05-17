@@ -27,23 +27,23 @@
      * @param {string} coordinates
      * @return {boolean}
      */
-var squareIsWhite = function(coordinates) {
-  let menuValue = {
-    'a': 1,
-    'b': 2,
-    'c': 3,
-    'd': 4,
-    'e': 5,
-    'f': 6,
-    'g': 7,
-    'h': 8
-  }
-  
+    var squareIsWhite = function(coordinates) {
+      let menuValue = {
+        'a': 1,
+        'b': 2,
+        'c': 3,
+        'd': 4,
+        'e': 5,
+        'f': 6,
+        'g': 7,
+        'h': 8
+      }
+      
 
-  let str1 = menuValue[coordinates[0]] % 2,
-      str2 = coordinates[1] % 2;
-  return !(str1 === str2)
-};
+      let str1 = menuValue[coordinates[0]] % 2,
+          str2 = coordinates[1] % 2;
+      return !(str1 === str2)
+    };
 
     console.log(squareIsWhite('c4'));
   </script>
