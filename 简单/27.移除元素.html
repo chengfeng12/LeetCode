@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>26.删除有序数组中的重复项</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+  /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+  var removeDuplicates = function (nums, val) {
+    const n = nums.length;
+    let left = 0;
+    for (let right = 0; right < n; right++) {
+        if (nums[right] !== val) {
+            nums[left] = nums[right];
+            left++;
+        }
+    }
+    return left;
+  };
+  // const nums = [0,0,1,1,1,2,2,3,3,4];
+  
+  // const nums = [1, 1, 2, 1, 11, 1];
+  // const nums = [3,2,2,3]
+  const nums = [0,1,2,2,3,0,4,2];
+  console.log(removeDuplicates(nums, 2), 'removeDuplicates');
+</script>
+
+</html>

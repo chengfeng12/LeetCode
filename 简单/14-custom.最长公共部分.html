@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * @param {string[]} strs
+     * @return {string}
+     */
+    const longestCommonPrefix = function (strs) {
+      let value = ""
+      if (!strs.length) return value
+      if (strs.length === 1) {
+        return strs[0]
+      }
+      let mixNumber = strs[0].length;
+      let mixIndex = 0;
+      let len = strs.length
+      for (let index = 1; index < len; index++) {
+        if (mixNumber > strs[index].length) {
+          mixIndex = index
+          mixNumber = strs[index].length
+        }
+      }
+      const current = strs.splice(mixIndex, 1)[0]
+      let l = 1
+      while (l <= current.length) {
+        const text = current.slice(0, l)
+        console.log(text, current,  l, 'text');
+        let result = true
+        for (let t = 0; t < strs.length; t++) {
+          result = strs[t].indexOf(text) >= 0
+          console.log(result, 'result');
+        }
+        if (!result) {
+          return value
+        } else {
+          l++;
+          value = text
+        }
+      }
+      return value
+    };
+    // const strs = ["flower","flow","flight"]
+    // const strs = ["ab", "a"]
+    // const strs = ["dog","racecar","car"]
+    const strs = ["reflower","flow","flight"]
+    
+
+    console.log(longestCommonPrefix(strs), 'longestCommonPrefix(strs)');
+  </script>
+</body>
+
+</html>

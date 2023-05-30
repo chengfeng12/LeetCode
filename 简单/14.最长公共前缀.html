@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>14.最长公共前缀</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * @param {string[]} strs
+     * @return {string}
+     */
+    /* const longestCommonPrefix = function (strs) {
+      let value = ""
+      if (!strs.length) return value
+      if (strs.length === 1) {
+        return strs[0]
+      }
+      let mixNumber = strs[0].length;
+      let mixIndex = 0;
+      let len = strs.length
+      for (let index = 1; index < len; index++) {
+        if (mixNumber > strs[index].length) {
+          mixIndex = index
+          mixNumber = strs[index].length
+        }
+      }
+      const current = strs.splice(mixIndex, 1)[0]
+      let l = 1
+      while (l <= current.length) {
+        const text = current.slice(0, l)
+        let result = true
+        result = strs.every(item => item.indexOf(text) === 0)
+        if (!result) {
+          return value
+        } else {
+          l++;
+          value = text
+        }
+      }
+      return value
+    }; */
+
+    const longestCommonPrefix = function (strs) {
+      if (strs.length == 0) return "";
+      let ans = strs[0];
+      for (let i = 1; i < strs.length; i++) {
+        let j = 0;
+        for (; j < ans.length && j < strs[i].length; j++) {
+          if (ans[j] != strs[i][j])
+            break;
+        }
+        ans = ans.substr(0, j);
+        if (ans === "")
+          return ans;
+      }
+      return ans;
+    }
+    const strs = ["flower", "flow", "flight"]
+    // const strs = ["ab", "a"]
+    // const strs = ["dog","racecar","car"]
+    // const strs = ["reflower","flow","flight"]
+    // const strs = ["flower","flower","flower","flower"]
+
+
+
+    console.log(longestCommonPrefix(strs), 'longestCommonPrefix(strs)');
+  </script>
+</body>
+
+</html>
