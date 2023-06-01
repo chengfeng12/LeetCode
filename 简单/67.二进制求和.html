@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>67.二进制求和</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+  // https://leetcode.cn/problems/add-binary/
+  /* 
+    给你两个二进制字符串 a 和 b ，以二进制字符串的形式返回它们的和。
+
+    输入:a = "11", b = "1"
+    输出："100"
+
+    输入：a = "1010", b = "1011"
+    输出："10101"
+
+  */
+  /**
+   * @param {string} a
+   * @param {string} b
+   * @return {string}
+   */
+  var addBinary = function(a, b) {
+    let r = a.length - 1
+    let l = b.length - 1
+    let flag = 0
+    let text = ""
+    while (r >= 0 || l >= 0) {
+      let aNum = a[r] * 1 || 0
+      let bNum = b[l] * 1 || 0
+      let sum = aNum + bNum + flag
+      if (sum >= 2) {
+        flag = 1
+      } else {
+        flag = 0
+      }
+      text = `${sum % 2}${text}`
+      r--;
+      l--;
+    }
+    if (flag === 1) {
+      text = `${flag}${text}`
+    }
+    return text
+  };
+
+  /**
+   * @param {string} a
+   * @param {string} b
+   * @return {string}
+   */
+  /* var addBinary = function(a, b) {
+      let ans = "";
+      let ca = 0;
+      for(let i = a.length - 1, j = b.length - 1;i >= 0 || j >= 0; i--, j--) {
+          let sum = ca;
+          sum += i >= 0 ? parseInt(a[i]) : 0;
+          sum += j >= 0 ? parseInt(b[j]) : 0;
+          ans += sum % 2;
+          ca = Math.floor(sum / 2);
+      }
+      ans += ca == 1 ? ca : "";
+      return ans.split('').reverse().join('');
+  }; */
+
+  console.log(addBinary('10010', '1011'), 'addBinary');
+</script>
+
+</html>
