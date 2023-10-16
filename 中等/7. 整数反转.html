@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7. 整数反转</title>
+</head>
+<body>
+  <!-- 
+    给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
+    如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。
+    假设环境不允许存储 64 位整数（有符号或无符号）。
+    示例 1：
+      输入：x = 123
+      输出：321
+
+    示例 2：
+      输入：x = -123
+      输出：-321
+    
+    示例 3：
+      输入：x = 120
+      输出：21
+
+    示例 4：
+      输入：x = 0
+      输出：0
+    提示：
+      -231 <= x <= 231 - 1
+   -->
+</body>
+<script>
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+  if (x === 0) return x
+  let max = Math.pow(2, 31);
+  // let absX = Math.abs(x)
+  // if (x > 0 && absX < max - 1) return 0
+  // if (x < 0 && absX < max) return 0
+  let strX = String(x);
+  let len = strX.length;
+  let result = x >= 0 ? "" : '-'
+  let isFilter = false;
+  for (let i = len - 1; i >= 0; i--) {
+    if (strX[i] === '0' && !isFilter) {
+      continue;
+    }
+    if (strX[i] !== '0') {
+      isFilter = true;
+    }
+    result += strX[i];
+  }
+  result = parseInt(result)
+  if (-max < result && result < max -1 ) return result
+  return 0
+};
+console.log(reverse(1534236469));
+</script>
+</html>
