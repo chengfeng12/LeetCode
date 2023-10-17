@@ -1,0 +1,93 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to right, #1de5e2, #b588f7);
+  height: 100vh;
+}
+body {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.root {
+  width: 500px;
+  height: calc(100vh - 200px);
+  position: relative;
+  top: 150px;
+  z-index: 0;
+  overflow-y: auto;
+}
+.root::-webkit-scrollbar {
+  width: 1px;
+  height: 10px;
+}
+/*正常情况下滑块的样式*/
+.root::-webkit-scrollbar-thumb {
+  background-image: transparent;
+  border-radius: 10px;
+  -webkit-box-shadow: inset1px1px0rgba(0, 0, 0, 0.1);
+}
+/*正常时候的主干部分*/
+.root::-webkit-scrollbar-track {
+  border-radius: 10px;
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0);
+  /* background-color: white; */
+  background-color: transparent;
+}
+/*鼠标悬浮在滚动条上的主干部分*/
+.root::-webkit-scrollbar-track:hover {
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.4);
+  background-color: transparent;
+}
+
+#tree {
+  padding: 10px;
+  position: relative;
+  border-radius: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.2)
+  );
+  backdrop-filter: blur(11px);
+}
+.c {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgb(240, 160, 0);
+  position: absolute;
+  top: 140px;
+  left: -40px;
+  z-index: -99;
+}
+.b {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #77fdd7;
+  position: absolute;
+  top: -50px;
+  left: 260px;
+  z-index: -99;
+}
+/* .root::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(10px);
+  z-index: -1;
+  background-image: linear-gradient(to right, #1DE5E2, #B588F7);
+  background-repeat: repeat;
+} */
+.root h1 {
+  margin: 0;
+}
