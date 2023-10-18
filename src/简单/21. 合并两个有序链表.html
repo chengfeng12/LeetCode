@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>21. 合并两个有序链表</title>
+  <link rel="stylesheet" href="../common.css">
+</head>
+<body>
+  <img src="./images/21. 合并两个有序链表.png">
+</body>
+<script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+// 不属于链表写法
+var mergeTwoLists = function(list1, list2) {
+  let len1 = list1.length;
+  let len2 = list2.length;
+  if (!len1) return list2
+  if (!len2) return list1
+  let l1 = 0;
+  let l2 = 0;
+  let s = []
+  while (l1 < len1 || l2 < len2) {
+    while (list1[l1] <= list2[l2]) {
+      s.push(list1[l1])
+      l1++;
+    }
+    while (list1[l1] > list2[l2]) {
+      s.push(list2[l2])
+      l2++;
+    }
+    if (l1 >= len1) {
+      s.push(list2[l2])
+      l2++;
+    } else if (l2 >= len2) {
+      s.push(list1[l1])
+      l1++;
+    }
+  }
+  return s
+};
+console.log(mergeTwoLists([], []));
+</script>
+</html>
