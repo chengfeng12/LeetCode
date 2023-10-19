@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>28. 找出字符串中第一个匹配项的下标</title>
+  <link rel="stylesheet" href="../common.css">
+</head>
+<body>
+  <img src="./images/28. 找出字符串中第一个匹配项的下标.png">
+</body>
+<script>
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function(haystack, needle) {
+  let s = -1;
+  if (needle.length > haystack.length) return s
+  if (haystack === needle) return 0
+  let l = 0,
+      q = 0;
+  while (q < haystack.length) {
+    for (let i = 0; i < needle.length; i++) {
+      if (needle[i] === haystack[q]) {
+        q++;
+      } else {
+        l++;
+        q = l;
+        break;
+      }
+    }
+    if (q - l === needle.length) {
+      return l
+    } 
+  }
+  return -1;
+};
+console.log(strStr('sadbutsad', 'sad'));
+// console.log(strStr('mississippi', 'issip'));
+
+</script>
+</html>
