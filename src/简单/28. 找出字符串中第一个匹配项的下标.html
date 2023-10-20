@@ -15,28 +15,57 @@
  * @param {string} needle
  * @return {number}
  */
-var strStr = function(haystack, needle) {
-  let s = -1;
-  if (needle.length > haystack.length) return s
-  if (haystack === needle) return 0
-  let l = 0,
-      q = 0;
-  while (q < haystack.length) {
-    for (let i = 0; i < needle.length; i++) {
-      if (needle[i] === haystack[q]) {
-        q++;
-      } else {
-        l++;
-        q = l;
-        break;
+// var strStr = function(haystack, needle) {
+//   let s = -1;
+//   if (needle.length > haystack.length) return s
+//   if (haystack === needle) return 0
+//   let l = 0,
+//       q = 0;
+//   while (q < haystack.length) {
+//     for (let i = 0; i < needle.length; i++) {
+//       if (needle[i] === haystack[q]) {
+//         q++;
+//       } else {
+//         l++;
+//         q = l;
+//         break;
+//       }
+//     }
+//     if (q - l === needle.length) {
+//       return l
+//     } 
+//   }
+//   return -1;
+// };
+var strStr = function (haystack, needle) {
+    const n = haystack.length, m = needle.length;
+    if (m === 0) {
+      return 0;
+    }
+    const pi = new Array(m).fill(0);
+    for (let i = 1, j = 0; i < m; i++) {
+      while (j > 0 && needle[i] !== needle[j]) {
+        j = pi[j - 1];
+      }
+      if (needle[i] == needle[j]) {
+        j++;
+      }
+      pi[i] = j;
+    }
+    console.log(pi, 'pi');
+    for (let i = 0, j = 0; i < n; i++) {
+      while (j > 0 && haystack[i] != needle[j]) {
+        j = pi[j - 1];
+      }
+      if (haystack[i] == needle[j]) {
+        j++;
+      }
+      if (j === m) {
+        return i - m + 1;
       }
     }
-    if (q - l === needle.length) {
-      return l
-    } 
-  }
-  return -1;
-};
+    return -1;
+  };
 console.log(strStr('sadbutsad', 'sad'));
 // console.log(strStr('mississippi', 'issip'));
 
